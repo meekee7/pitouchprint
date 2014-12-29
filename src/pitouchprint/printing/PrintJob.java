@@ -7,5 +7,17 @@ public class PrintJob {
     public static PrintJob currentJob = new PrintJob();
     private boolean landscape = false;
     private int copies = 1;
-    //TODO the file
+    private String filepath = null;
+
+    public boolean isLandscape() {
+        return landscape;
+    }
+
+    public int getCopies() {
+        return copies;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
 }

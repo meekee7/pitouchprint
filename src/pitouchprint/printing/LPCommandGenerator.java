@@ -1,5 +1,7 @@
 package pitouchprint.printing;
 
+import pitouchprint.configuration.Settings;
+
 import java.io.IOException;
 
 /**
@@ -11,6 +13,13 @@ public class LPCommandGenerator implements CommandGenerator {
         StringBuilder sb = new StringBuilder();
         sb.append("lp ");
         //TODO the rest of the command building
+        sb.append("-d ");
+        sb.append(Settings.currentsettings.getPrinter()).append(' ');
+        sb.append("-o fitplot ");
+        sb.append("-o");
+
+        sb.append(job.getFilepath());
+
         return sb.toString();
     }
 

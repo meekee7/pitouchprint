@@ -16,10 +16,12 @@ import java.nio.file.StandardOpenOption;
  */
 @XmlRootElement
 public class Settings {
+    private static final String settingsfilename = "settings.xml";
     public static Settings currentsettings = null;
     private static Unmarshaller unmarshaller = null;
-    private static final String settingsfilename = "settings.xml";
-
+    private String printer = null;
+    private String mediadirectory = null;
+    private boolean fullscreen = false;
 
     public static void readFromFile() throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Settings.class);
@@ -34,8 +36,14 @@ public class Settings {
         }
     }
 
+    @XmlElement
+    public String getPrinter() {
+        return printer;
+    }
 
-    private boolean fullscreen = false;
+    public void setPrinter(String printer) {
+        this.printer = printer;
+    }
 
     @XmlElement
     public boolean getFullscreen() {
@@ -45,9 +53,6 @@ public class Settings {
     public void setFullscreen(boolean fullscreen) {
         this.fullscreen = fullscreen;
     }
-
-    //@XmlElement
-    private String mediadirectory = null;
 
     @XmlElement
     public String getMediadirectory() {
