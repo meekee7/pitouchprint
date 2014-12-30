@@ -20,4 +20,16 @@ public class PrintJob {
     public String getFilepath() {
         return filepath;
     }
+
+    public void setLandscape(boolean landscape) {
+        this.landscape = landscape;
+    }
+
+    public void setCopies(int copies) {
+        this.copies = copies;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
 }

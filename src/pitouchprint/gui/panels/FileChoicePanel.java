@@ -9,4 +9,9 @@ public class FileChoicePanel extends AbstractPanel {
     public FileChoicePanel() {
         super(Strings.filechoicetitle);
     }
+
+    @Override
+    public void addToPrintJob() {
+        //TODO
+    }
 }

@@ -11,16 +11,17 @@ import java.awt.*;
  */
 public class MainWindow extends JFrame {
 
-    private static final AbstractPanel[] middlepanels = {new FileChoicePanel(), new CopiesPanel(), new OrientationPanel(), new StartPrintingPanel()};
+    private static final AbstractPanel[] middlepanels = {new FileChoicePanel(), new RangePanel(), new CopiesPanel(), new OrientationPanel(), new StartPrintingPanel()};
     private int currentpanelnumber;
     private JPanel middlepanel;
     private JButton forwardbtn, backbtn;
     private CardLayout middlepanellayout;
 
-    public static final Font defaultfont = new Font("Dialog", Font.PLAIN, 48);
+    //public static final Font defaultfont = new Font("Dialog", Font.PLAIN, 60);
 
     public MainWindow() {
         super();
+        //this.setLayout(new BorderLayout(10, 10));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(new Dimension(800, 480));
         this.setMinimumSize(new Dimension(400, 240)); //TODO find optimal values
@@ -29,7 +30,7 @@ public class MainWindow extends JFrame {
         if (Settings.currentsettings.getFullscreen())
             this.setExtendedState(Frame.MAXIMIZED_BOTH);
 
-        JPanel mainpanel = new JPanel(new BorderLayout(10, 10));
+        JPanel mainpanel = new JPanel(new BorderLayout(20, 20));
 
         this.currentpanelnumber = 0;
         this.middlepanellayout = new CardLayout();
@@ -40,15 +41,15 @@ public class MainWindow extends JFrame {
         mainpanel.add(this.middlepanel, BorderLayout.CENTER);
 
         this.backbtn = new JButton(Strings.backbtnlabel);
-        this.backbtn.setPreferredSize(new Dimension(100, 480));
-        this.backbtn.setFont(defaultfont);
+        this.backbtn.setPreferredSize(new Dimension(120, 480));
+        this.backbtn.setFont(new Font(Style.fontname, Font.BOLD, Style.hugefont));
         this.backbtn.addActionListener(l -> MainWindow.this.goBack());
         this.backbtn.setEnabled(false);
         mainpanel.add(this.backbtn, BorderLayout.WEST);
 
         this.forwardbtn = new JButton(Strings.forwardbtnlabel);
-        this.forwardbtn.setPreferredSize(new Dimension(100, 480));
-        this.forwardbtn.setFont(defaultfont);
+        this.forwardbtn.setPreferredSize(new Dimension(120, 480));
+        this.forwardbtn.setFont(new Font(Style.fontname, Font.BOLD, Style.hugefont));
         this.forwardbtn.addActionListener(l -> MainWindow.this.goForward());
         mainpanel.add(this.forwardbtn, BorderLayout.EAST);
 

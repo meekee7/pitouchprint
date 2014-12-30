@@ -9,4 +9,9 @@ public class StartPrintingPanel extends AbstractPanel {
     public StartPrintingPanel() {
         super(Strings.startprintingtitle);
     }
+
+    @Override
+    public void addToPrintJob() {
+        //TODO what do we do here
+    }
 }
