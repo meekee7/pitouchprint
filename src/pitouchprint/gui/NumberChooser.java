@@ -15,6 +15,7 @@ public class NumberChooser extends JPanel {
 
     public NumberChooser(String title, int minimum, int maximum) {
         super(new BorderLayout(10, 10));
+        validate(minimum, maximum);
         this.maximum = maximum;
         this.minimum = minimum;
         this.numberlabel = new JLabel(Integer.toString(this.number));
@@ -26,14 +27,14 @@ public class NumberChooser extends JPanel {
             this.morebtn.setEnabled(true);
             this.number--;                  //It is quite possible that we use this sloppily here and should put a NumberChooser. before every this
             this.numberlabel.setText(Integer.toString(this.number));
-            if (this.number <= 1)
+            if (this.number <= this.minimum)
                 this.lessbtn.setEnabled(false);
         });
         this.morebtn.addActionListener(l -> {
             this.lessbtn.setEnabled(true);
             this.number++;
             this.numberlabel.setText(Integer.toString(this.number));
-            if (this.number >= maximum)
+            if (this.number >= this.maximum)
                 this.morebtn.setEnabled(false);
         });
         this.lessbtn.setEnabled(false);
@@ -54,7 +55,7 @@ public class NumberChooser extends JPanel {
         this.add(middlepanel, BorderLayout.CENTER);
         this.add(this.lessbtn, BorderLayout.WEST);
         this.add(this.morebtn, BorderLayout.EAST);
-        this.number = 1;
+        this.number = this.minimum;
     }
 
     public int getNumber() {
@@ -62,10 +63,21 @@ public class NumberChooser extends JPanel {
     }
 
     public void setMinimum(int minimum) {
+        validate(minimum, this.maximum);
         this.minimum = minimum;
     }
 
     public void setMaximum(int maximum) {
+        validate(this.minimum, maximum);
         this.maximum = maximum;
+    }
+
+    public static void validate(int minimum, int maximum) {
+        if (minimum <= 0)
+            throw new IllegalArgumentException("Minimum must be at least 1");
+        if (maximum <= 0)
+            throw new IllegalArgumentException("Maximum must be at least 1");
+        if (minimum > maximum)
+            throw new IllegalArgumentException("Minimum is more than maximum");
     }
 }

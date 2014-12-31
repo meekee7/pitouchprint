@@ -20,4 +20,7 @@ public class Strings {
     public static String copiestitle = "Anzahl Kopien";
     public static String filechoicetitle = "Datei auswählen";
     public static String startprintingtitle = "Druck starten";
+    public static String rangetitle = "Druckbereich";
+    public static String rangefrom = "Von Seite";
+    public static String rangeto = "Bis Seite";
 }

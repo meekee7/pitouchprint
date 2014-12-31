@@ -1,6 +1,7 @@
 package pitouchprint.gui.panels;
 
 import pitouchprint.gui.NumberChooser;
+import pitouchprint.gui.Strings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +12,10 @@ import java.awt.*;
 public class RangePanel extends AbstractPanel {
 
     public RangePanel() {
-        super("Druckbereich");
+        super(Strings.rangetitle);
         JPanel panel = new JPanel(new BorderLayout(10, 10));
-        panel.add(new NumberChooser("Von Seite", 99), BorderLayout.NORTH);
-        panel.add(new NumberChooser("Bis Seite", 99), BorderLayout.SOUTH);
+        panel.add(new NumberChooser(Strings.rangefrom, 1, 99), BorderLayout.NORTH);
+        panel.add(new NumberChooser(Strings.rangeto, 1, 99), BorderLayout.SOUTH);
         this.add(panel, BorderLayout.CENTER);
     }
 
