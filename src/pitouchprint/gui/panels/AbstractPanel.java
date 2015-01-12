@@ -1,5 +1,7 @@
 package pitouchprint.gui.panels;
 
+import pitouchprint.gui.Style;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +12,7 @@ public abstract class AbstractPanel extends JPanel {
     public String title;
 
     public AbstractPanel(String title) {
-        super(new BorderLayout());
+        super(new BorderLayout(Style.normalbordersize, Style.normalbordersize));
         JLabel titlelabel = new JLabel(title);
         titlelabel.setFont(new Font("Dialog", Font.PLAIN, 24));
         titlelabel.setHorizontalAlignment(SwingConstants.CENTER);

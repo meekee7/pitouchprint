@@ -10,6 +10,9 @@ public class Style {
     public static final int largefont = 48;
     public static final int hugefont = 60;
 
+    public static final int normalbordersize = 10;
+    public static final int largebordersize = 20;
+
     private Style() {
     }
 }

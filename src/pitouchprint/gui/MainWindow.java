@@ -30,7 +30,7 @@ public class MainWindow extends JFrame {
         if (Settings.currentsettings.getFullscreen())
             this.setExtendedState(Frame.MAXIMIZED_BOTH);
 
-        JPanel mainpanel = new JPanel(new BorderLayout(20, 20));
+        JPanel mainpanel = new JPanel(new BorderLayout(Style.largebordersize, Style.largebordersize));
 
         this.currentpanelnumber = 0;
         this.middlepanellayout = new CardLayout();

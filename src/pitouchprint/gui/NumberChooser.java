@@ -12,30 +12,28 @@ public class NumberChooser extends JPanel {
     private JLabel numberlabel;
     private JButton lessbtn, morebtn;
 
+    public static enum Mode {ALONE, LOWER, UPPER}
 
-    public NumberChooser(String title, int minimum, int maximum) {
+    private Mode mode;
+    private NumberChooser correspondant;
+
+    public NumberChooser(Mode mode, String title, int minimum, int maximum) {
         super(new BorderLayout(10, 10));
         validate(minimum, maximum);
+        this.mode = mode;
         this.maximum = maximum;
         this.minimum = minimum;
         this.numberlabel = new JLabel(Integer.toString(this.number));
         this.lessbtn = new JButton(Strings.backbtnlabel);
         this.morebtn = new JButton(Strings.forwardbtnlabel);
 
-
         this.lessbtn.addActionListener(l -> {
-            this.morebtn.setEnabled(true);
-            this.number--;                  //It is quite possible that we use this sloppily here and should put a NumberChooser. before every this
-            this.numberlabel.setText(Integer.toString(this.number));
-            if (this.number <= this.minimum)
-                this.lessbtn.setEnabled(false);
+            this.setNumber(--this.number);
+            this.correspond();
         });
         this.morebtn.addActionListener(l -> {
-            this.lessbtn.setEnabled(true);
-            this.number++;
-            this.numberlabel.setText(Integer.toString(this.number));
-            if (this.number >= this.maximum)
-                this.morebtn.setEnabled(false);
+            this.setNumber(++this.number);
+            this.correspond();
         });
         this.lessbtn.setEnabled(false);
         this.lessbtn.setPreferredSize(new Dimension(120, 180));
@@ -58,6 +56,17 @@ public class NumberChooser extends JPanel {
         this.number = this.minimum;
     }
 
+    public void setCorrespondant(NumberChooser correspondant) {
+        this.correspondant = correspondant;
+        switch (this.mode) {
+            case LOWER:
+                this.setMaximum(correspondant.getNumber());
+                break;
+            case UPPER:
+                this.setMinimum(correspondant.getNumber());
+        }
+    }
+
     public int getNumber() {
         return this.number;
     }
@@ -65,11 +74,39 @@ public class NumberChooser extends JPanel {
     public void setMinimum(int minimum) {
         validate(minimum, this.maximum);
         this.minimum = minimum;
+        this.setButtonState();
+        if (minimum >= this.number)
+            this.setNumber(minimum);
     }
 
     public void setMaximum(int maximum) {
         validate(this.minimum, maximum);
         this.maximum = maximum;
+        this.setButtonState();
+        if (maximum <= this.number)
+            this.setNumber(maximum);
+    }
+
+    private void setNumber(int number) {
+        this.number = number;
+        this.numberlabel.setText(Integer.toString(this.number));
+    }
+
+    private void setButtonState() {
+        this.lessbtn.setEnabled(this.number > this.minimum);
+        this.morebtn.setEnabled(this.number < this.maximum);
+    }
+
+    private void correspond() {
+        switch (this.mode) {
+            case UPPER:
+                this.correspondant.setMaximum(this.number);
+                break;
+            case LOWER:
+                this.correspondant.setMinimum(this.number);
+                break;
+        }
+        this.setButtonState();
     }
 
     public static void validate(int minimum, int maximum) {

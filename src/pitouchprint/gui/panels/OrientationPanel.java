@@ -15,7 +15,7 @@ public class OrientationPanel extends AbstractPanel {
 
     public OrientationPanel() {
         super(Strings.orientationtitle);
-        JPanel buttonpanel = new JPanel(new BorderLayout());
+        JPanel buttonpanel = new JPanel(new BorderLayout(Style.normalbordersize, Style.normalbordersize));
         ButtonGroup group = new ButtonGroup();
         this.portrait = new JRadioButton("Hoch", true);
         this.landscape = new JRadioButton("Quer");

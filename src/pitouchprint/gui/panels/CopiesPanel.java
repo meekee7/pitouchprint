@@ -14,7 +14,7 @@ public class CopiesPanel extends AbstractPanel {
     private NumberChooser numberChooser;
     public CopiesPanel() {
         super(Strings.copiestitle);
-        this.numberChooser = new NumberChooser(null, 1, 99);
+        this.numberChooser = new NumberChooser(NumberChooser.Mode.ALONE, null, 1, 99);
         this.add(this.numberChooser, BorderLayout.CENTER);
     }
 
