@@ -16,7 +16,8 @@ public class LPCommandGenerator implements CommandGenerator {
         sb.append("-d ");
         sb.append(Settings.currentsettings.getPrinter()).append(' ');
         sb.append("-o fitplot ");
-        sb.append("-o");
+        //sb.append("-o");
+        sb.append("-P ").append(job.getFrompage()).append(';').append(job.getTopage()).append(' ');
 
         sb.append(job.getFilepath());
 

@@ -8,6 +8,8 @@ public class PrintJob {
     private boolean landscape = false;
     private int copies = 1;
     private String filepath = null;
+    private int frompage = 1;
+    private int topage = 1;
 
     public boolean isLandscape() {
         return landscape;
@@ -31,5 +33,21 @@ public class PrintJob {
 
     public void setFilepath(String filepath) {
         this.filepath = filepath;
+    }
+
+    public int getFrompage() {
+        return frompage;
+    }
+
+    public void setFrompage(int frompage) {
+        this.frompage = frompage;
+    }
+
+    public int getTopage() {
+        return topage;
+    }
+
+    public void setTopage(int topage) {
+        this.topage = topage;
     }
 }

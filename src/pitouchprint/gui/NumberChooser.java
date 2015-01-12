@@ -11,9 +11,6 @@ public class NumberChooser extends JPanel {
     private int minimum, maximum;
     private JLabel numberlabel;
     private JButton lessbtn, morebtn;
-
-    public static enum Mode {ALONE, LOWER, UPPER}
-
     private Mode mode;
     private NumberChooser correspondant;
 
@@ -35,7 +32,7 @@ public class NumberChooser extends JPanel {
             this.setNumber(++this.number);
             this.correspond();
         });
-        this.lessbtn.setEnabled(false);
+
         this.lessbtn.setPreferredSize(new Dimension(120, 180));
         this.morebtn.setPreferredSize(new Dimension(120, 180));
         this.lessbtn.setFont(new Font(Style.fontname, Font.BOLD, Style.largefont));
@@ -56,6 +53,15 @@ public class NumberChooser extends JPanel {
         this.number = this.minimum;
     }
 
+    public static void validate(int minimum, int maximum) {
+        if (minimum <= 0)
+            throw new IllegalArgumentException("Minimum must be at least 1");
+        if (maximum <= 0)
+            throw new IllegalArgumentException("Maximum must be at least 1");
+        if (minimum > maximum)
+            throw new IllegalArgumentException("Minimum is more than maximum");
+    }
+
     public void setCorrespondant(NumberChooser correspondant) {
         this.correspondant = correspondant;
         switch (this.mode) {
@@ -69,6 +75,11 @@ public class NumberChooser extends JPanel {
 
     public int getNumber() {
         return this.number;
+    }
+
+    private void setNumber(int number) {
+        this.number = number;
+        this.numberlabel.setText(Integer.toString(number));
     }
 
     public void setMinimum(int minimum) {
@@ -85,11 +96,6 @@ public class NumberChooser extends JPanel {
         this.setButtonState();
         if (maximum <= this.number)
             this.setNumber(maximum);
-    }
-
-    private void setNumber(int number) {
-        this.number = number;
-        this.numberlabel.setText(Integer.toString(this.number));
     }
 
     private void setButtonState() {
@@ -109,12 +115,5 @@ public class NumberChooser extends JPanel {
         this.setButtonState();
     }
 
-    public static void validate(int minimum, int maximum) {
-        if (minimum <= 0)
-            throw new IllegalArgumentException("Minimum must be at least 1");
-        if (maximum <= 0)
-            throw new IllegalArgumentException("Maximum must be at least 1");
-        if (minimum > maximum)
-            throw new IllegalArgumentException("Minimum is more than maximum");
-    }
+    public static enum Mode {ALONE, LOWER, UPPER}
 }

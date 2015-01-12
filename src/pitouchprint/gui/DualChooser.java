@@ -12,7 +12,7 @@ public class DualChooser extends JPanel {
 
     public DualChooser(String lowertitle, String uppertitle, int minimum, int maximum) {
         super(new BorderLayout(10, 10));
-        validate(minimum, maximum);
+        NumberChooser.validate(minimum, maximum);
         this.minimum = minimum;
         this.maximum = maximum;
         this.lower = new NumberChooser(NumberChooser.Mode.LOWER, lowertitle, minimum, maximum);
@@ -24,14 +24,14 @@ public class DualChooser extends JPanel {
     }
 
     public void setMinimum(int minimum) {
-        validate(minimum, this.maximum);
+        NumberChooser.validate(minimum, this.maximum);
         this.minimum = minimum;
         this.lower.setMinimum(minimum);
         this.upper.setMinimum(minimum);
     }
 
     public void setMaximum(int maximum) {
-        validate(this.minimum, maximum);
+        NumberChooser.validate(this.minimum, maximum);
         this.maximum = maximum;
         this.lower.setMaximum(maximum);
         this.upper.setMaximum(maximum);
@@ -43,14 +43,5 @@ public class DualChooser extends JPanel {
 
     public int getUpperValue() {
         return this.upper.getNumber();
-    }
-
-    public static void validate(int minimum, int maximum) {
-        if (minimum <= 0)
-            throw new IllegalArgumentException("Minimum must be at least 1");
-        if (maximum <= 0)
-            throw new IllegalArgumentException("Maximum must be at least 1");
-        if (minimum > maximum)
-            throw new IllegalArgumentException("Minimum is more than maximum");
     }
 }
